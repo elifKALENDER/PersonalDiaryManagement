@@ -6,21 +6,36 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PersonalDiaryManagementSystem_dll {
-    public static class day {
+    public static class Day {
+        /**
+         * Kullanıcıdan bir tarih alacağız ve o tarih üzerinden o günün hangi gün olduğunu bulacağız
+         * 
+         */
+        public static string FindDay( DateTime date) {
 
-        public static string FindDay( int InpYear,int InpMonth,int InpDay) {
-
-            DateTime myDate = new DateTime(InpYear, InpMonth, InpDay);
-            string dayName = myDate.DayOfWeek.ToString();
+            //DateTime date = new DateTime(InpYear, InpMonth, InpDay);
+            string dayName = date.DayOfWeek.ToString();
 
             return dayName;
         }
+        /**
+         * kulllanıcıdan aldığımız tarihi bir Id parçası haline getiriyoruz daha sonra onu aşağıda personId ile birleştirip yeni bir Id elde edeceğiz
+         * 
+         *  
+         */
+        public static int GenerateUniqueIDFromDate(DateTime date) {
+            
+            int dateID = int.Parse(date.ToString("yyyyMMdd"));
+            return dateID;
+        }
 
-        
-        public static string SetId( int personId,  int date ) {
-
-           //TO DO
-           return(personId + "_" + date);
+        /**
+         * kullanıcıId ile ogünün tarihin sayıları birleştirilerek yeni bir uniqeId oluşturulacak yani Pimary key olacak
+         *  
+         */
+        public static int SetId( int personID,  int dateID ) {            
+            
+            return int.Parse($"{dateID}{personID}");            
         }
     }
 }
